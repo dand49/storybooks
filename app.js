@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const exphbs = require('express-handlebars');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -14,6 +15,7 @@ require('./config/passport')(passport);
 // Load Routes
 const index = require('./routes/index');
 const auth = require('./routes/auth');
+const stories = require('./routes/stories');
 
 // Load Keys
 const keys = require('./config/keys')
@@ -25,7 +27,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {
   useMongoClient: true
 })
-  .then( () => console.log('MongoDB Connected'))
+  .then( () => console.log('MongoDB Connected to: ' + keys.mongoURI))
   .catch(err => console.log(err));
 
 const app = express();
@@ -53,9 +55,13 @@ app.use((req, res, next) => {
   next();
 });
 
+// Set Static Folder
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Use Routes
 app.use('/', index);
 app.use('/auth', auth);
+app.use('/stories', stories);
 
 const port = process.env.PORT || 5000;
 
