@@ -16,6 +16,19 @@ router.get('/',  (req, res)  => {
     });
 });
 
+// Show Single Story
+router.get('/show/:id', (req, res) => {
+  Story.findOne({
+    _id: req.params.id
+  })
+    .populate('user')
+    .then(story => {
+      res.render('stories/show', {
+        story: story
+      });
+    });
+});
+
 // Add Story Form
 router.get('/add', ensureAuthenticated, (req, res)  => {
   res.render('stories/add');
