@@ -34,5 +34,13 @@ module.exports = {
     } else {
       return '';
     }
+  },
+
+  cardStatus: function(status) {
+    if (status == 'public') {
+      return '<div class="card">';
+    } else {
+      return '<div class="card blue-grey lighten-5">';
+    }
   }
 }
