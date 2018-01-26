@@ -38,9 +38,9 @@ module.exports = {
 
   cardStatus: function(status) {
     if (status == 'public') {
-      return '<div class="card block-view">';
+      return '<div class="card">';
     } else {
-      return '<div class="card blue-grey lighten-5 block-view">';
+      return '<div class="card blue-grey lighten-5">';
     }
   }
 }

@@ -28,6 +28,6 @@ footer {
   display: inline;
 }
 
-.block-view {
-  height: 350px;
+.block-body-size {
+  height: 280px;
 }
