@@ -39,7 +39,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {
   useMongoClient: true
 })
-  .then( () => console.log('MongoDB Connected to: ' + keys.mongoURI))
+  .then(() => console.log('MongoDB Connected to: ' + keys.mongoURI))
   .catch(err => console.log(err));
 
 const app = express();

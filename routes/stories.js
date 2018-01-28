@@ -3,13 +3,13 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Story = mongoose.model('stories');
 const User = mongoose.model('users');
-const {ensureAuthenticated, ensureGuest} = require('../helpers/auth');
+const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
 
 // Stories Index
-router.get('/',  (req, res)  => {
-  Story.find({status: 'public'})
+router.get('/', (req, res) => {
+  Story.find({ status: 'public' })
     .populate('user')
-    .sort({date: 'desc'})
+    .sort({ date: 'desc' })
     .then(stories => {
       res.render('stories/index', {
         stories: stories
@@ -25,12 +25,12 @@ router.get('/show/:id', (req, res) => {
     .populate('user')
     .populate('comments.commentUser')
     .then(story => {
-      if(story.status == 'public') {
+      if (story.status == 'public') {
         res.render('stories/show', {
           story: story
         });
       } else {
-        if ( req.user ) {
+        if (req.user) {
           if (req.user.id == story.user._id) {
             res.render('stories/show', {
               story: story
@@ -47,7 +47,7 @@ router.get('/show/:id', (req, res) => {
 
 // List Stories From a User
 router.get('/user/:userId', (req, res) => {
-  Story.find({user: req.params.userId, status: 'public'})
+  Story.find({ user: req.params.userId, status: 'public' })
     .populate('user')
     .then(stories => {
       res.render('stories/index', {
@@ -58,7 +58,7 @@ router.get('/user/:userId', (req, res) => {
 
 // Logged in Users Stories
 router.get('/my', ensureAuthenticated, (req, res) => {
-  Story.find({user: req.user.id})
+  Story.find({ user: req.user.id })
     .populate('user')
     .then(stories => {
       res.render('stories/index', {
@@ -68,12 +68,12 @@ router.get('/my', ensureAuthenticated, (req, res) => {
 });
 
 // Add Story Form
-router.get('/add', ensureAuthenticated, (req, res)  => {
+router.get('/add', ensureAuthenticated, (req, res) => {
   res.render('stories/add');
 });
 
 // Edit Story Form
-router.get('/edit/:id', ensureAuthenticated, (req, res)  => {
+router.get('/edit/:id', ensureAuthenticated, (req, res) => {
   Story.findOne({
     _id: req.params.id
   })
@@ -143,7 +143,7 @@ router.put('/:id', (req, res) => {
 
 // Delete Story
 router.delete('/:id', (req, res) => {
-  Story.remove({_id: req.params.id})
+  Story.remove({ _id: req.params.id })
     .then(() => {
       res.redirect('/dashboard');
     });
