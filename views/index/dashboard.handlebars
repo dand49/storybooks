@@ -4,7 +4,7 @@
   <table class="striped">
     <thead>
       <tr>
-        <th>Title</th>
+        <th><a href="">Title</a></th>
         <th>Date</th>
         <th>Status</th>
         <th></th>
@@ -13,7 +13,11 @@
     <tbody>
       {{#each stories}}
         <tr>
-          <td><a href="/stories/show/{{id}}">{{title}}</a></td>
+          <td><a href="/stories/show/{{id}}">{{title}}
+          {{#if author}}
+            <small>&nbsp;&nbsp;(By: {{author}})</small>
+          {{/if}}
+          </a></td>
           <td>{{formatDate date 'MMMM Do YYYY'}}</td>
           <td><span class="dash-status">{{status}}</span></td>
           <td>

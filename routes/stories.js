@@ -100,6 +100,7 @@ router.post('/', (req, res) => {
 
   const newStory = {
     title: req.body.title,
+    author: req.body.author,
     body: req.body.body,
     status: req.body.status,
     allowComments: allowComments,
@@ -130,6 +131,7 @@ router.put('/:id', (req, res) => {
 
       // New Value
       story.title = req.body.title;
+      story.author = req.body.author;
       story.body = req.body.body;
       story.status = req.body.status;
       story.allowComments = allowComments;
