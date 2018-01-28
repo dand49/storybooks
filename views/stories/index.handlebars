@@ -10,6 +10,9 @@
       </div>
       <div class="card-content center-align block-body-size">
         <h5>{{title}}</h5>
+        {{#if author}}
+          <h6>By: {{author}}</h6>
+        {{/if}}
         <p class="card-text story-text">{{truncate (stripTags body) 150}}</p>
         <br>
         <div class="chip">

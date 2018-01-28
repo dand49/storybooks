@@ -9,7 +9,7 @@
       <ul class="right hide-on-small-only">
         {{#if user}}
         <li>
-          <a href="/dashboard">Welcome {{user.firstName}}</a>
+          <a href="/auth/user/{{user.id}}">Welcome {{user.firstName}}</a>
         </li>
         <li>
           <a href="/auth/logout">
