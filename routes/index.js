@@ -10,7 +10,6 @@ router.get('/', ensureGuest, (req, res) => {
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
   Story.find({user: req.user.id})
-    .sort('date')
     .then(stories => {
       res.render('index/dashboard', {
         stories: stories
@@ -19,9 +18,15 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
 
 });
 
-// router.get('/dashboard', ensureAuthenticated, (req, res) => {
-
-// });
+router.get('/dashboard/:sortField', ensureAuthenticated, (req, res) => {
+  Story.find({user: req.user.id})
+    .sort(req.params.sortField)
+    .then(stories => {
+      res.render('index/dashboard', {
+        stories: stories
+      });
+    });
+});
 
 router.get('/about', (req, res) => {
   res.render('index/about');
