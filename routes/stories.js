@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Story = mongoose.model('stories');
 const User = mongoose.model('users');
-const { ensureAuthenticated, ensureGuest } = require('../helpers/auth');
+const { ensureAuthenticated, ensureGuest, ensureAdmin } = require('../helpers/auth');
 
 // Stories Index
 router.get('/', (req, res) => {
@@ -59,6 +59,17 @@ router.get('/user/:userId', (req, res) => {
 // Logged in Users Stories
 router.get('/my', ensureAuthenticated, (req, res) => {
   Story.find({ user: req.user.id })
+    .populate('user')
+    .then(stories => {
+      res.render('stories/index', {
+        stories: stories
+      });
+    })
+});
+
+// Show All Stories. For Admin Only
+router.get('/all', ensureAdmin, (req, res) => {
+  Story.find()
     .populate('user')
     .then(stories => {
       res.render('stories/index', {

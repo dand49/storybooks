@@ -44,5 +44,15 @@ module.exports = {
     } else { // private
       return '<div class="card blue-grey lighten-5">';
     }
+  },
+
+  adminMenuItems: function(user) {
+    let data = '';
+    if (user && user.firstName === 'Dan' && user.lastName === 'Dorton') {
+       data = `<li>
+                 <a href="/stories/all"><i class="fa fa-th-list"></i> All Stories</a>
+              </li>`;
+    }
+    return data;
   }
 }
