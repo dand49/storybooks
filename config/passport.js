@@ -18,7 +18,7 @@ module.exports = function(passport) {
 
       const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
       
-      console.log(profile);
+      //console.log(profile);
 
       const newUser = {
         googleID: profile.id,
@@ -30,8 +30,8 @@ module.exports = function(passport) {
         provider: profile.provider,
         url: profile.url,
         isPlusUser: profile.isPlusUser,
-        language: profile.language,
         isVerified: profile.isVerified,
+        language: profile.language,
         image: image
       }
 
@@ -41,27 +41,28 @@ module.exports = function(passport) {
       })
         .then(user => {
           if(user) {
-          user.email = newUser.email;
-          user.firstName = newUser.firstName;
-          user.lastName = newUser.lastName;
-          user.displayName = newUser.displayName;
-          user.gender = newUser.gender;
-          user.provider = newUser.provider;
-          user.url = newUser.url;
-          user.isPlusUser = newUser.isPlusUser;
-          user.isVerified = newUser.isVerified;
-          user.image = image;
+            user.displayName = newUser.displayName;
+            user.firstName = newUser.firstName;
+            user.lastName = newUser.lastName;
+            user.email = newUser.email;
+            user.gender = newUser.gender;
+            user.provider = newUser.provider;
+            user.url = newUser.url;
+            user.isPlusUser = newUser.isPlusUser;
+            user.isVerified = newUser.isVerified;
+            user.language = newUser.language;
+            user.image = image;
 
-          user.save()
-            .then(user => done(null, user));
+            user.save()
+              .then(user => done(null, user));
           // // Return user
           // done(null, user);
-        } else {
+          } else {
           // Create User
-          new User(newUser)
-            .save()
-            .then(user => done(null, user));
-        }
+            new User(newUser)
+              .save()
+              .then(user => done(null, user));
+          }
       })
     })
   );
