@@ -17,8 +17,29 @@ const UserSchema = new Schema({
   lastName: {
     type: String
   },
-  image: {
+  displayName: {
     type:String
+  },
+  gender: {
+    type: String
+  },
+  image: {
+    type: String
+  },
+  provider: {
+    type: String
+  },
+  url: {
+    type: String
+  },
+  isPlusUser: {
+    type: Boolean
+  },
+  language: {
+    type: String
+  },
+  isVerified: {
+    type: Boolean
   }
 });
 

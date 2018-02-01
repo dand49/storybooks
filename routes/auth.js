@@ -19,6 +19,7 @@ router.get('/verify', (req, res) => {
   } else {
     console.log('Not Authenticated');
   }
+  res.redirect('../');
 });
 
 router.get('/logout', (req, res) => {

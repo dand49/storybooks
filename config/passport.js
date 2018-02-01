@@ -18,11 +18,20 @@ module.exports = function(passport) {
 
       const image = profile.photos[0].value.substring(0, profile.photos[0].value.indexOf('?'));
       
+      console.log(profile);
+
       const newUser = {
         googleID: profile.id,
+        displayName: profile.displayName,
         firstName: profile.name.givenName,
         lastName: profile.name.familyName,
         email: profile.emails[0].value,
+        gender: profile.gender,
+        provider: profile.provider,
+        url: profile.url,
+        isPlusUser: profile.isPlusUser,
+        language: profile.language,
+        isVerified: profile.isVerified,
         image: image
       }
 
@@ -30,17 +39,30 @@ module.exports = function(passport) {
       User.findOne({
         googleID: profile.id
       })
-       .then(user => {
-         if(user) {
-           // Return user
-           done(null, user);
-         } else {
-           // Create User
-           new User(newUser)
-             .save()
-             .then(user => done(null, user));
-         }
-       })
+        .then(user => {
+          if(user) {
+          user.email = newUser.email;
+          user.firstName = newUser.firstName;
+          user.lastName = newUser.lastName;
+          user.displayName = newUser.displayName;
+          user.gender = newUser.gender;
+          user.provider = newUser.provider;
+          user.url = newUser.url;
+          user.isPlusUser = newUser.isPlusUser;
+          user.isVerified = newUser.isVerified;
+          user.image = image;
+
+          user.save()
+            .then(user => done(null, user));
+          // // Return user
+          // done(null, user);
+        } else {
+          // Create User
+          new User(newUser)
+            .save()
+            .then(user => done(null, user));
+        }
+      })
     })
   );
 
