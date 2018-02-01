@@ -1,8 +1,11 @@
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated()) {
+    console.log(`ensureAuthenticated: ${req.user}`);
+    if (req.isAuthenticated() || isAdmin(req)) {
+      console.log(`ensureAuthenticated next(): ${next}`);
       return next();
     }
+    console.log(`ensureAuthenticated redirect()`);
     res.redirect('/');
   },
 
@@ -15,11 +18,20 @@ module.exports = {
   },
 
   ensureAdmin: function(req, res, next) {
-    if ( req.isAuthenticated 
-         && req.user.firstName === 'Dan'
-         && req.user.lastName === 'Dorton') {
+    if ( req.isAuthenticated() 
+         && isAdmin(req) ) {
       return next();
     }
     res.redirect('/');
+  },
+
+  isAdmin: function(req) {
+    if (req.user.firstName === 'Dan'
+        && req.user.lastName === 'Dorton') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
+

@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const Story = mongoose.model('stories');
 const User = mongoose.model('users');
-const { ensureAuthenticated, ensureGuest, ensureAdmin } = require('../helpers/auth');
+const { ensureAuthenticated, ensureGuest, ensureAdmin, isAdmin } = require('../helpers/auth');
 
 // Stories Index
 router.get('/', (req, res) => {
@@ -89,7 +89,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
     .then(story => {
-      if (story.user != req.user.id) {
+      if (story.user != req.user.id && !isAdmin(req)) {
         res.redirect('/stories');
       } else {
         res.render('stories/edit', {

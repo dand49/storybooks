@@ -31,7 +31,8 @@ const {
   select,
   editIcon,
   cardStatus,
-  adminMenuItems
+  adminMenuItems,
+  isAdmin
 } = require('./helpers/hbs');
 
 // Map Global Promises
@@ -62,7 +63,8 @@ app.engine('handlebars', exphbs({
     select: select,
     editIcon: editIcon,
     cardStatus: cardStatus,
-    adminMenuItems: adminMenuItems
+    adminMenuItems: adminMenuItems,
+    isAdmin: isAdmin
   },
   defaultLayout: 'main'
 }));
