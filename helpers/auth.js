@@ -16,7 +16,7 @@ module.exports = {
 
   ensureAdmin: function(req, res, next) {
     if ( req.isAuthenticated() 
-         && isAdmin(req) ) {
+         && module.exports.isAdmin(req) ) {
       return next();
     }
     res.redirect('/');
