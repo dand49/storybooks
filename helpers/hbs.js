@@ -25,7 +25,8 @@ module.exports = {
   },
 
   editIcon: function(storyUser, loggedUser, storyId, floating = true) {
-    if ( storyUser == loggedUser ) {
+    if ( storyUser.id === loggedUser.id ||
+        (loggedUser.firstName === 'Dan' && loggedUser.lastName === 'Dorton')) {
       if ( floating ) {
         return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>`;
       } else {
@@ -44,5 +45,15 @@ module.exports = {
     } else { // private
       return '<div class="card blue-grey lighten-5">';
     }
+  },
+
+  adminMenuItems: function(user) {
+    let data = '';
+    if (user && user.firstName === 'Dan' && user.lastName === 'Dorton') {
+       data = `<li>
+                 <a href="/stories/all"><i class="fa fa-th-list"></i> All Stories</a>
+              </li>`;
+    }
+    return data;
   }
 }

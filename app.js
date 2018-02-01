@@ -30,7 +30,9 @@ const {
   formatDate,
   select,
   editIcon,
-  cardStatus
+  cardStatus,
+  adminMenuItems,
+  isAdmin
 } = require('./helpers/hbs');
 
 // Map Global Promises
@@ -40,7 +42,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {
   useMongoClient: true
 })
-  .then( () => console.log('MongoDB Connected to: ' + keys.mongoURI))
+  .then(() => console.log('MongoDB Connected to: ' + keys.mongoURI))
   .catch(err => console.log(err));
 
 const app = express();
@@ -60,7 +62,9 @@ app.engine('handlebars', exphbs({
     formatDate: formatDate,
     select: select,
     editIcon: editIcon,
-    cardStatus: cardStatus
+    cardStatus: cardStatus,
+    adminMenuItems: adminMenuItems,
+    isAdmin: isAdmin
   },
   defaultLayout: 'main'
 }));

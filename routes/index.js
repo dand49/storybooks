@@ -15,7 +15,6 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => {
         stories: stories
       });
     });
-
 });
 
 router.get('/dashboard/:sortField', ensureAuthenticated, (req, res) => {
