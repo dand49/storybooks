@@ -70,7 +70,7 @@ app.set('view engine', 'handlebars');
 
 app.use(cookieParser());
 app.use(session({
-  secret: 'MyFavoriteSecret9',
+  secret: 'MyFavoriteSecret5',
   resave: false,
   saveUninitialized: false
 }));

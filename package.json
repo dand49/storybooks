@@ -6,8 +6,24 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "Dan Dorton",
+  "author": {
+    "name": "Dan Dorton",
+    "email": "ddorton@xmission.com",
+    "url": "http://www.appit.com"
+  },
+  "contributors": [
+    {
+      "name": "Tay Kratzer",
+      "email": "tay.kratzer@gmail.com",
+      "url": "http://www.appit.com"
+    }
+  ],
   "license": "UNLICENSED",
+  "private": true,
+  "bugs": { 
+    "url" : "https://appit.com/appit/support/issues", 
+    "email" : "support@appit.com"
+    },
   "dependencies": {
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
