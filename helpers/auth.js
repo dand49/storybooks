@@ -1,11 +1,8 @@
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    console.log(`ensureAuthenticated: ${req.user}`);
     if (req.isAuthenticated() || isAdmin(req)) {
-      console.log(`ensureAuthenticated next(): ${next}`);
       return next();
     }
-    console.log(`ensureAuthenticated redirect()`);
     res.redirect('/');
   },
 
