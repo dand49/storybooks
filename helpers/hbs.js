@@ -1,4 +1,5 @@
 const moment = require('moment');
+const auth = require('./auth');
 
 module.exports = {
   truncate: function(str, len) {
@@ -25,12 +26,17 @@ module.exports = {
   },
 
   editIcon: function(storyUser, loggedUser, storyId, floating = true) {
-    if ( storyUser.id === loggedUser.id ||
-        (loggedUser.firstName === 'Dan' && loggedUser.lastName === 'Dorton')) {
-      if ( floating ) {
-        return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>`;
+    if ( loggedUser && storyUser ) {
+      if ( storyUser.id === loggedUser.id ||
+        auth.isAdmin(loggedUser)
+        ) {
+        if ( floating ) {
+          return `<a href="/stories/edit/${storyId}" class="btn-floating halfway-fab red"><i class="fa fa-pencil"></i></a>`;
+        } else {
+          return `<a href="/stories/edit/${storyId}"><i class="fa fa-pencil"></i></a>`;
+        }
       } else {
-        return `<a href="/stories/edit/${storyId}"><i class="fa fa-pencil"></i></a>`;
+        return '';
       }
     } else {
       return '';
@@ -49,8 +55,8 @@ module.exports = {
 
   adminMenuItems: function(user) {
     let data = '';
-    if (user && user.firstName === 'Dan' && user.lastName === 'Dorton') {
-       data = `<li>
+    if (auth.isAdmin(user)) {
+        data = `<li>
                  <a href="/stories/all"><i class="fa fa-th-list"></i> All Stories</a>
               </li>`;
     }
