@@ -1,6 +1,6 @@
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated() || isAdmin(req)) {
+    if (req.isAuthenticated() || module.exports.isAdmin(req)) {
       return next();
     }
     res.redirect('/');
