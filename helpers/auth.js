@@ -1,6 +1,6 @@
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated() || module.exports.isAdmin(req.user)) {
+    if (req.isAuthenticated() /*|| module.exports.isAdmin(req.user)*/) {
       return next();
     }
     res.redirect('/');
@@ -23,7 +23,8 @@ module.exports = {
   },
 
   isAdmin: function(user) {
-    if (user.firstName === 'Dan'
+    if ( user
+        && user.firstName === 'Dan'
         && user.lastName === 'Dorton') {
       return true;
     } else {

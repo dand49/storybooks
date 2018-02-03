@@ -89,7 +89,7 @@ router.get('/edit/:id', ensureAuthenticated, (req, res) => {
     _id: req.params.id
   })
     .then(story => {
-      if (story.user != req.user.id && !isAdmin(req)) {
+      if (story.user != req.user.id && !isAdmin(req.user)) {
         res.redirect('/stories');
       } else {
         res.render('stories/edit', {
