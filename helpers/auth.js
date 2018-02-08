@@ -1,6 +1,8 @@
+const keys = require('../config/keys');
+
 module.exports = {
   ensureAuthenticated: function(req, res, next) {
-    if (req.isAuthenticated() /*|| module.exports.isAdmin(req.user)*/) {
+    if (req.isAuthenticated() {
       return next();
     }
     res.redirect('/');
@@ -24,8 +26,8 @@ module.exports = {
 
   isAdmin: function(user) {
     if ( user
-        && user.firstName === 'Dan'
-        && user.lastName === 'Dorton') {
+        && user.firstName === keys.adminUser.firstName
+        && user.lastName === keys.adminUser.lastName) {
       return true;
     } else {
       return false;
